@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const sendMail = require("./email");
 
 
-mongoose.connect("mongodb://localhost:27017/chatroom", {
+mongoose.connect("mongodb+srv://hmmmzaDev:Qa3GtdDWgSK8oeth@testdb.i7mb2.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useCreateIndex: true
