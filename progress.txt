@@ -1,0 +1,35 @@
+*changed things*
+- disabling the user to update their name (updating name will be enabled later!)
+- adding option to update password
+
+
+___________________________________________________
+___________________________________________________
+*fine things*:
+- login-signup
+- updation of the logged-in profile
+- fetching ongoing chats + adding new chats(needs approval feature yet)
+- sending and fetching messages
+___________________________________________________
+___________________________________________________
+*pending things*(necessary):
+- block a user from sending messages
+- filter through the ongoing chats
+- show a profile modal for the visible chat
+- show request status for a submitted request (succes or failure)
+- sort the ongoing chats by latest-message-chat
+- show the latest message preview under the name of the chat-person in ongoing chats
+***************************************************
+(this block is set to pending)
+- deleting the selected chat by extracting the chat id from global variable, and then sending the chat id via ajax... Once the chat is deleted, the function for getting the ongoing chats will be called- to update the chatsList
+- while deleting a chat for a user, we need to keep the chat for the other user... To do so, just add another field *delete* for every chat...
+***************************************************
+___________________________________________________
+___________________________________________________
+*promising things*
+- socket.io library:
+        keeping track of user's activity and showing to other users
+- keeping track of message sending and chat requests
+- verify password and confirm password in backend for updating user's own profile
+- stickers(emoji stickers)
+- group chats

@@ -1,0 +1,4 @@
+- working on block-user functionality
+- chat approval on chat request
+
+- attach atlas for online version!

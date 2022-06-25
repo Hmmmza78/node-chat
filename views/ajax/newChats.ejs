@@ -1,0 +1,18 @@
+<div class="container">
+  <% for(let i=0; i < users.length; i++){ let user = users[i]; %>
+  <div class="newChats my-2">
+    <img src="uploads/<%= user.image?user.image:"default.png" %>"
+    class="rounded-template" style="max-width: 50px" alt="" />
+    <h6 style="display: inline"><%= user.name %></h6>
+    <div
+      class="float-right"
+      style="position: relative; right: -8px; bottom: -7px"
+    >
+      <button onclick="startChat(this)" data-other-uid="<%= user._id %>" class="btn btn-primary">Start chat</button>
+      <button onclick="blockUser(this)" class="btn btn-danger">Block</button>
+    </div>
+  </div>
+  <% } if(users.length==0){ %>
+  <div class="text-center">No Users to chat with!</div>
+  <% } %>
+</div>

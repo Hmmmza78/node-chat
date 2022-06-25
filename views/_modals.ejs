@@ -1,0 +1,119 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="profileModal"
+  tabindex="-1"
+  aria-labelledby="profileModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        id="updateForm"
+        action="/user/update"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="modal-body">
+          <div class="container">
+            <div class="text-center form-group">
+              <img
+                class="rounded-circle"
+                style="width: 250px"
+                src="uploads/<% if(userInfo.image ==null){ %>default.png<% } else { %><%= userInfo.image %> <% } %>"
+                id="profileImg"
+                alt=""
+              />
+            </div>
+            <div class="text-center my-2"><h5><%= userInfo.name %> </h5></div>
+            <div class="form-group">
+              <label for="profileImg" class="form-label">Update Image:</label>
+              <input
+                type="file"
+                name="image"
+                id="profileImg"
+                class="form-control"
+              />
+            </div>
+            <!-- don't delete the following comment block -->
+            <!-- <div class="form-group">
+              <label for="profileName" class="form-label">Name:</label>
+              <input
+                readonly
+                type="text"
+                name="username"
+                id="profileName"
+                class="form-control"
+              />
+            </div> -->
+            <div class="form-group">
+              <label for="profilePassword" class="form-label">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="profilePassword"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="profileCPassword" class="form-label"
+                >Confirm Password:</label
+              >
+              <input
+                type="password"
+                name="cpassword"
+                id="profileCPassword"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group" style="display: none">
+              <input name="uid" type="text" value="<%= uid %>" id="updateUid" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="/logout" type="button" class="btn btn-secondary"> Logout </a>
+          <button id="updateBtn" type="submit" class="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="chatsModal"
+  tabindex="-1"
+  aria-labelledby="chatsModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chatsModalLabel">Start a chat</h5>
+        <button
+        id="newChatCloseBtn"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container" id="newChatsContainer"></div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

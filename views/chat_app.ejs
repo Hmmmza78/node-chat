@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Chat App- Developed by Hamza Dev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="resources/jquery/jquery.min.js"></script>
+    <link
+      href="resources/bootstrap-5.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="resources/fontawesome/fontawesome.min.css" />
+    <script src="resources/bootstrap-5.1.1/js/bootstrap.bundle.js"></script>
+
+    <style>
+      .chat-history {
+        height: 379px !important;
+        overflow: auto !important;
+        bottom: auto;
+      }
+
+      .message {
+        max-width: 50% !important;
+      }
+      #msgsBox {
+        /* height: 584px !important; */
+      }
+    </style>
+  </head>
+  <body>
+    <link
+      href="resources/font-awesome-4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-lg-12">
+          <div class="card chat-app" style="min-height: 540px">
+            <div id="plist" class="people-list">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span style="height: 38px" class="input-group-text"
+                    ><i class="fa fa-search"></i
+                  ></span>
+                </div>
+                <input
+                  onkeyup="filterChats(this)"
+                  type="text"
+                  class="form-control"
+                  placeholder="Search..."
+                />
+              </div>
+              <ul id="chatsList" class="list-unstyled chat-list mt-2 mb-0"></ul>
+            </div>
+            <div id="" class="chat">
+              <%- include("_message_header") %>
+              <div id="msgsBox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include("_styles") %> <%- include("_modals", {userInfo: userInfo, uid:
+    uid}) %>
+
+    <script type="text/javascript">
+      let chatId;
+      let token = "<%= token %>";
+      let uid = "<%= uid %>";
+      // console.log(uid);
+
+      $(document).ready(function () {
+        let chatBlock = $("#chatBlock");
+        let chatsList = $("#chatsList");
+        let newChat = chatBlock;
+        getChats();
+      });
+    </script>
+    <!-- ajax for getting chats -->
+
+    <script>
+      function getChats() {
+        $.ajax({
+          type: "post",
+          url: "/chat/" + uid,
+          data: {},
+          success: function (response) {
+            $("#chatsList").html(response);
+            let chats = document.getElementsByClassName("chat-contacts");
+            if (chats.length > 0) {
+              $(chats[0]).click();
+            } else {
+              // this section is still pending(needs attention)
+              $("#chatsList").html(
+                "<p style='padding-top:10px; text-align:center;'>No Chats yet!</p>"
+              );
+              $("#chat-status").html(
+                "<p style='text-align:right;'>Start a chat!</p>"
+              );
+            }
+          },
+        });
+      }
+    </script>
+
+    <!-- ajax for getting messages -->
+    <script>
+      function getMsgs(el) {
+        let targetChat = $(el);
+        chatId = targetChat.attr("id");
+        let chatImg = $("#" + chatId + " img").attr("src");
+        $.ajax({
+          type: "post",
+          url: "/message/" + chatId,
+          data: { user: uid },
+          success: function (response) {
+            $("#msgsBox").html(response);
+            $("#msgsName").text($("#" + chatId + " .about .name").text());
+            var element = document.getElementById("chat-history");
+            element.scrollTop = element.scrollHeight;
+            $("#topImg").attr("src", chatImg);
+            sendOnEnter();
+          },
+        });
+      }
+    </script>
+    <!-- script for sending message on enter -->
+    <script>
+      function sendOnEnter() {
+        $("#msgTxt").keyup(function (e) {
+          if (e.key == "Enter") {
+            $("#sendBtn").click();
+          }
+        });
+      }
+    </script>
+    <!-- script for filtering present chats -->
+    <script>
+      function filterChats(el) {}
+    </script>
+    <!-- ajax for sending the message -->
+    <script>
+      function sendMsg(el) {
+        let message = $("#msgTxt").val();
+        if (message.length > 0) {
+          $.ajax({
+            type: "post",
+            url: "/message/new",
+            data: {
+              message: message,
+              sender: uid,
+              chat_id: chatId,
+            },
+            // dataType: "dataType",
+            success: function (response) {
+              if (response.status == "success") {
+                $("#msgTxt").val("");
+                $("#" + chatId).click();
+              }
+              // console.log(response);
+            },
+          });
+        } else {
+          alert("you can't send empty message!");
+        }
+      }
+    </script>
+
+    <!-- ajax for getting users in new chat modal -->
+    <script>
+      function getNewChats() {
+        $.ajax({
+          type: "post",
+          url: "/chat/newChats",
+          data: { uid },
+          success: function (response) {
+            // console.log(response);
+            $("#newChatsContainer").html(response);
+          },
+        });
+      }
+    </script>
+    <!-- block user script -->
+    <!-- temporarily unavailable -->
+    <script>
+      function blockUser(el) {
+        alert("This feature will be available soon! :)");
+      }
+    </script>
+
+    <!-- ajax for making new chat -->
+    <script>
+      function startChat(el) {
+        let target = $(el);
+        let otherUid = target.attr("data-other-uid");
+        $.ajax({
+          type: "post",
+          url: "/chat/new",
+          data: { person1: uid, person2: otherUid },
+          // dataType: "dataType",
+          success: function (response) {
+            // console.log(response);
+            getChats();
+            $("#newChatCloseBtn").click();
+          },
+        });
+      }
+    </script>
+
+    <!-- script for updating logged-in user's profile -->
+    <script>
+      $("#updateForm").submit(function (e) {
+        if ($("#profilePassword").val() != $("#profileCPassword").val()) {
+          e.preventDefault();
+          alert("Password and confirm password don't match!");
+        }
+      });
+    </script>
+  </body>
+</html>

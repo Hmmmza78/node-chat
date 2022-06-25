@@ -1,0 +1,41 @@
+<!DOCTYPE HTML5>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="resources/bootstrap-5.1.1/css/bootstrap.min.css"
+      rel="stylesheet" type="text/css"
+    />
+    <%- include("styles") %> 
+
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container m-5 p-4">
+      <form action="" method="post">
+        <div class="form-group">
+          <input type="text" name="name" id="name" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" id="password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+        <div class="form-group">
+          <a href="/register">register</a>
+        </div>
+      </form>
+    </div>
+
+    <script src="resources/jquery/jquery.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="resources/bootstrap-5.1.1/js/bootstrap.bundle.js"
+    ></script>
+  </body>
+</html>

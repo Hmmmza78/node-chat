@@ -1,0 +1,30 @@
+<div id="chat-history" class="chat-history">
+  <ul class="m-b-0">
+    <% for(let i=0; i < messages.length; i++){ let message = messages[i]; %>
+    <li class="clearfix">
+      <div
+        class="message <% if(user == message.sender){ %> other-message float-right <% } else { %> my-message <% } %>"
+      >
+        <%= message.message %>
+      </div>
+    </li>
+    <% } %>
+  </ul>
+</div>
+<div class="chat-message clearfix" >
+  <!-- style="position: relative; top: 120px" -->
+  <div class="input-group mb-0">
+    <div id="sendBtn" onclick="sendMsg(this)" class="input-group-prepend">
+      <span style="padding: 10px" class="input-group-text"
+        ><i class="fa fa-send"></i
+      ></span>
+    </div>
+    <input
+      onkeyup=""
+      type="text"
+      class="form-control"
+      id="msgTxt"
+      placeholder="Enter text here..."
+    />
+  </div>
+</div>

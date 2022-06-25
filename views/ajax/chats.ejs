@@ -1,0 +1,13 @@
+<% chats.forEach((chat)=>{ %>
+
+<li onclick="getMsgs(this)" id="<%= chat.id %>" class="clearfix chat-contacts">
+  <img width="27px" src="uploads/<%= chat.image %>" alt="avatar" />
+  <div class="about">
+    <div class="name"><%= chat.name %></div>
+    <div class="status">
+      <i class="fa fa-circle offline"></i> Last seen- unknown
+    </div>
+  </div>
+</li>
+
+<% }) %>

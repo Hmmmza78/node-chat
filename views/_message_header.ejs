@@ -1,0 +1,41 @@
+<div class="chat-header clearfix">
+  <div class="row">
+    <div class="col-lg-6" id="chat-status">
+      <a
+        href="javascript:void(0);"
+        data-toggle="modal"
+        data-target="#view_info"
+      >
+        <img
+          id="topImg"
+          src="https://bootdey.com/img/Content/avatar/avatar2.png"
+          alt="avatar"
+        />
+      </a>
+      <div class="chat-about">
+        <h6 id="msgsName" class="m-b-0"></h6>
+        <small>Last seen- unknown</small>
+      </div>
+    </div>
+    <div class="col-lg-6 hidden-sm text-right" style="text-align: right">
+      <a
+        role="button"
+        data-bs-toggle="modal"
+        data-bs-target="#chatsModal"
+        id="newChatsBtn"
+        onclick="getNewChats()"
+        href="javascript:void(0);"
+        class="btn btn-outline-success"
+        ><i class="fa fa-users"></i
+      ></a>
+      <a
+        role="button"
+        data-bs-toggle="modal"
+        data-bs-target="#profileModal"
+        href="javascript:void(0);"
+        class="btn btn-outline-secondary"
+        ><i class="fa fa-cogs"></i
+      ></a>
+    </div>
+  </div>
+</div>
